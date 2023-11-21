@@ -1,0 +1,24 @@
+package selenium_introduction;
+
+public class stringReverse {
+	/*public static void main(String[] args) {
+		String str = "Reverse";
+		String revS = "";
+		for(int i=str.length()-1;i>=0;i--) {
+			revS = revS+str.charAt(i);
+		}
+		System.out.print(revS);
+	}*/
+	
+	public static void main(String[] args) {
+		String str = "Code to reverse a sentence";
+		String revS = "";
+		String[] stsplit = str.split(" ");
+		for (String word : stsplit) {
+			revS = revS +" "+ word;
+		}
+		System.out.print(revS);
+	}
+
+}
+

@@ -1,0 +1,20 @@
+package selenium_introduction;
+
+public class stringReverse {
+	public String reverseString(String str) {
+		String revS = "";
+		for(int i=str.length()-1;i>0;i--) {
+			revS = revS+str.charAt(i);
+		}
+		return revS;
+	}
+
+}
+
+public class stringReverseMain() {
+	public static void main(String args[]) {
+		String str = "Reverse";
+		stringReverse sr = new stringReverse();
+		System.out.print(sr.reverseString(str));
+	}
+}

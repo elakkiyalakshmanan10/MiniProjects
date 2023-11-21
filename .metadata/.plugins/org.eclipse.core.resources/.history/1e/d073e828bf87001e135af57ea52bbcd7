@@ -1,0 +1,27 @@
+package selenium_introduction;
+
+import java.util.Scanner;
+
+public class stringToggle {
+	public static void main(String[] args) {
+		System.out.print("Enter the string to toggle:");
+		Scanner sc=new Scanner(System.in);  
+		String str = sc.nextLine();
+		System.out.print("Toggled string is "+(str));		
+	}
+	
+	public String strToggleMethod(String str) {
+		String temp = "";
+		int strsize = str.length();
+		int i = 0;
+		while(i<strsize-1) {
+			if(Character.isUpperCase(str.charAt(i))) 
+				 temp=temp+Character.toLowerCase(str.charAt(i));
+			else 
+				 temp=temp+Character.toUpperCase(str.charAt(i));
+			i++;
+		}
+		return temp;
+	}
+
+}
