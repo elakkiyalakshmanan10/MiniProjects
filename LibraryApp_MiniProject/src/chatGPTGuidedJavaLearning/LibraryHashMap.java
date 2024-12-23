@@ -98,6 +98,27 @@ public class LibraryHashMap {
 
 	    }
 	    
+	    //Download EBook
+	    public void downloadEBook(int id) throws BookNotFoundException {
+	        Book book = books.get(id);
+	        if (book instanceof EBook ebook) {
+	            ebook.download();
+	        } else {
+	            throw new BookNotFoundException("The book with ID " + id + " is not an EBook.");
+	        }
+	    }
+
+	    //Check Printed Books Stock
+	    public void checkPrintedBookStock(int id) throws BookNotFoundException {
+	        Book book = books.get(id);
+	        if (book instanceof PrintedBook printedBook) {
+	            printedBook.checkStock();
+	        } else {
+	            throw new BookNotFoundException("The book with ID " + id + " is not a PrintedBook.");
+	        }
+	    }
+
+	    
 	    //Save Library books list to file
 	    public void saveLibraryToFile(String filename) {
 	        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {

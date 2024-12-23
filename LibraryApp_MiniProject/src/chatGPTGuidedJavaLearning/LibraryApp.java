@@ -24,22 +24,54 @@ public class LibraryApp {
             System.out.println("5. Sort books by Title");
             System.out.println("6. Find unique authors");
             System.out.println("7. Search Books by Author");
-            System.out.println("8. Save and Exit");
+            System.out.println("8. Download EBook");
+            System.out.println("9. Get Printed Book");
+            System.out.println("10. Save and Exit");
             System.out.print("Choose an option: ");
             
             int choice = scanner.nextInt();
+            scanner.nextLine();
             
             switch(choice) {
-            case 1: //Add a book
-            	System.out.print("Enter Book ID: ");
+            case 1: // Add a book
+                System.out.println("Choose the type of book to add:");
+                System.out.println("1. EBook");
+                System.out.println("2. PrintedBook");
+                int bookType = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+                
+                System.out.print("Enter Book ID: ");
                 int id = scanner.nextInt();
                 scanner.nextLine(); // Consume newline
+                
                 System.out.print("Enter Book Title: ");
                 String title = scanner.nextLine();
+                
                 System.out.print("Enter Book Author: ");
                 String author = scanner.nextLine();
-                library.addBook(new Book(id, title, author));
+                
+                if (bookType == 1) {
+                    // EBook-specific details
+                    System.out.print("Enter Number of Pages: ");
+                    int numberOfPages = scanner.nextInt();
+                    
+                    // Add as EBook
+                    library.addBook(new EBook(id, title, author, numberOfPages));
+                } else if (bookType == 2) {
+                    // PrintedBook-specific details
+                    System.out.print("Enter Number of Pages: ");
+                    int numberOfPages = scanner.nextInt();
+                    
+                    System.out.print("Enter Stock: ");
+                    int stock = scanner.nextInt();
+                    
+                    // Add as PrintedBook
+                    library.addBook(new PrintedBook(id, title, author, numberOfPages, stock));
+                } else {
+                    System.out.println("Invalid book type selected.");
+                }
                 break;
+
         		
             case 2: //Remove a book by ID
             	System.out.print("Enter the ID of the book to be removed");
@@ -87,7 +119,27 @@ public class LibraryApp {
             	}
             	break;
             	
-            case 8: //Save and Exit
+            case 8: // Download EBook
+                System.out.print("Enter Book ID to download: ");
+                int ebookId = scanner.nextInt();
+                try {
+                    library.downloadEBook(ebookId);
+                } catch (BookNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+
+            case 9: // Check Printed Book Stock
+                System.out.print("Enter Book ID to check stock: ");
+                int printedBookId = scanner.nextInt();
+                try {
+                    library.checkPrintedBookStock(printedBookId);
+                } catch (BookNotFoundException e) {
+                    System.out.println(e.getMessage());
+                }
+                break;
+            	
+            case 10: //Save and Exit
             	library.saveLibraryToFile(filename);
             	running = false;
             	break;
